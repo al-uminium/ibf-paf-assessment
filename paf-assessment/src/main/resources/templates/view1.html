@@ -20,7 +20,9 @@
       <tr th:each="beer : ${beers}">
         <td th:text="${beer.beerName}"></td>
         <td th:text="${beer.beerDescription}"></td>
-        <td th:text="${beer.breweryName}"></td>
+        <td>
+          <a th:href="@{/brewery/{id}(id=${beer.breweryId})}"><span th:text="${beer.breweryName}"></span></a>
+        </td>
       </tr>
     </tbody>
   </table>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div th:if="${brewery.name}">
+    <h1 th:text="${brewery.name}"></h1>
+    <a th:href="@{/}">Back</a>
+    <table th:if="${brewery.name}">
+      <tr>
+        <td>Description</td>
+        <td th:text="brewery.description"></td>
+      </tr>
+      <tr>
+        <td>Address</td>
+        <td>
+          <span th:text="${brewery.address1}"><br></span>
+          <span th:text="${brewery.address2}"><br></span>
+          <span th:text="${brewery.city}"><br></span>
+        </td>
+      </tr>
+      <tr>
+        <td>Phone</td>
+        <td th:text="${brewery.phone}"></td>
+      </tr>
+      <tr>
+        <td>Website</td>
+        <td><a th:href="@{{website}(website = ${brewery.website})}">Go</a></td>
+      </tr>
+    </table>
+    <h2>Beers</h2>
+    <form action="#" th:action="@{/brewery/{breweryId}/order(breweryId=${brewery.breweryId})}" method="post">
+      <table border="1">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Quantity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="beer : ${brewery.beers}">
+            <td>
+              <span th:text="${beer.beerName}"></span>
+              <input type="text" name="beerId" style="display: none;" th:value="${beer.beerName}">
+            </td>
+            <td th:text="${beer.beerDescription}"></td>
+            <td><input type="number" name="qty" ></td>
+          </tr>
+        </tbody>
+      </table>
+      <input type="submit" value="Place Order">
+    </form>
+  </div>
+  <div>
+    <h1 th:if="${brewery.name} == null">Brewery Not Found</h1>
+  </div>
+</body>
+</html>
