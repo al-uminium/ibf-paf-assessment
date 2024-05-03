@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1 th:text="${styleName}"></h1>
+  <a th:href="@{/}">Back</a>
+  <table border="1" th:if="${not #lists.isEmpty(beers)}">
+    <thead>
+      <tr>
+        <th>Beer Name</th>
+        <th>Description</th>
+        <th>Brewery Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="beer : ${beers}">
+        <td th:text="${beer.beerName}"></td>
+        <td th:text="${beer.beerDescription}"></td>
+        <td th:text="${beer.breweryName}"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h1 th:if="${#lists.isEmpty(beers)}">
+    No beers found for this style.
+  </h1>
+</body>
+</html>

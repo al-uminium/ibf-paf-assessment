@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ibf2024.assessment.paf.batch4.models.Beer;
@@ -28,6 +29,14 @@ public class BeerController {
 	
 	
 	//TODO Task 3 - view 1
+	@GetMapping("/beer/style/{styleID}{styleName}")
+	public String getMethodName(@PathVariable Integer styleID, @RequestParam String styleName, Model model) {
+		List<Beer> beers = beerRepo.getBreweriesByBeer(styleID);
+		model.addAttribute("styleName", styleName);
+		model.addAttribute("beers", beers);
+		return "view1";
+	}
+	
 	
 
 	//TODO Task 4 - view 2
