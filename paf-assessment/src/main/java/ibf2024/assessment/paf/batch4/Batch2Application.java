@@ -14,7 +14,7 @@ import ibf2024.assessment.paf.batch4.models.Style;
 import ibf2024.assessment.paf.batch4.repositories.BeerRepository;
 
 @SpringBootApplication
-public class Batch2Application implements CommandLineRunner{
+public class Batch2Application /*implements CommandLineRunner*/{
 
 	@Autowired BeerRepository beerRepo;
 
@@ -22,22 +22,22 @@ public class Batch2Application implements CommandLineRunner{
 		SpringApplication.run(Batch2Application.class, args);
 	}
 
-	@Override
-	public void run(String... args) throws Exception {
-		List<Style> ls = beerRepo.getStyles();
+	// @Override
+	// public void run(String... args) throws Exception {
+	// 	List<Style> ls = beerRepo.getStyles();
 
-		for (Style style : ls) {
-			System.out.println(style.toString());
-		}
+	// 	for (Style style : ls) {
+	// 		System.out.println(style.toString());
+	// 	}
 
-		List<Beer> br = beerRepo.getBreweriesByBeer(1);
+	// 	List<Beer> br = beerRepo.getBreweriesByBeer(1);
 
-		for (Beer beer : br) {
-			System.out.println(beer.toString());
-		}
+	// 	for (Beer beer : br) {
+	// 		System.out.println(beer.toString());
+	// 	}
 
-		Optional<Brewery> brw = beerRepo.getBeersFromBrewery();
-		System.out.println(brw.toString());
-	}
+	// 	Optional<Brewery> brw = beerRepo.getBeersFromBrewery(10);
+	// 	System.out.println(brw.toString());
+	// }
 
 }

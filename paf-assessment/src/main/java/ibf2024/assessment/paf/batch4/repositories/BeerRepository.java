@@ -53,12 +53,12 @@ public class BeerRepository implements SQLQueries, SQLColumnNames {
 	}
 
 	// DO NOT CHANGE THE METHOD'S NAME OR THE RETURN TYPE OF THIS METHOD
-	public Optional<Brewery> getBeersFromBrewery() {
+	public Optional<Brewery> getBeersFromBrewery(Integer breweryID) {
 		// TODO: Task 4
 		Brewery brewery = new Brewery();
 		List<Beer> beersList = new LinkedList<>();
 
-		SqlRowSet rs = jdbcTemplate.queryForRowSet(GET_BEERS_AND_DESCRIP_FOR_BREWERY);
+		SqlRowSet rs = jdbcTemplate.queryForRowSet(GET_BEERS_AND_DESCRIP_FOR_BREWERY, breweryID);
 
 		while (rs.next()) {
 			Beer beer = new Beer();

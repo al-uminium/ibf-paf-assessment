@@ -25,7 +25,7 @@ public interface SQLQueries {
   // To get relevant rows for view 2
   public static final String GET_BEERS_AND_DESCRIP_FOR_BREWERY = """
     select breweries.id as brewery_id,
-	breweries.name as brewery_name,
+	  breweries.name as brewery_name,
     breweries.address1 as address1,
     breweries.address2 as address2,
     breweries.city as city, 
@@ -34,14 +34,14 @@ public interface SQLQueries {
     breweries.country as country,
     breweries.phone as phone,
     breweries.descript as brewery_descript,
-	breweries.website as website,
-	beers.id as beer_id,
-	beers.name as beer_name, 
+	  breweries.website as website,
+	  beers.id as beer_id,
+	  beers.name as beer_name, 
     beers.descript as beer_descript
-		from beers
-		inner join breweries
-		on beers.brewery_id = breweries.id
-		where breweries.id = 10
-		order by beer_name;
+      from beers
+      inner join breweries
+      on beers.brewery_id = breweries.id
+      where breweries.id = ?
+      order by beer_name;
       """;
 }
