@@ -18,22 +18,30 @@ public interface SQLQueries {
       from beers
       inner join breweries
         on beers.brewery_id = breweries.id
-        where beers.style_id = 1;
+        where beers.style_id = ?;
       """;
 
   // Task 4
-  // To get description of brewery for view 2
-  public static final String GET_BREWERY_BY_ID = """
-      select * from breweries where id = ?;
-      """;
-  
   // To get relevant rows for view 2
   public static final String GET_BEERS_AND_DESCRIP_FOR_BREWERY = """
-      select beers.name as beer_name, beers.descript as description
-      from beers
-        inner join breweries
-        on beers.brewery_id = breweries.id
-        where breweries.id = 10
-        order by beer_name ASC;
+    select breweries.id as brewery_id,
+	breweries.name as brewery_name,
+    breweries.address1 as address1,
+    breweries.address2 as address2,
+    breweries.city as city, 
+    breweries.state as state,
+    breweries.code as code, 
+    breweries.country as country,
+    breweries.phone as phone,
+    breweries.descript as brewery_descript,
+	breweries.website as website,
+	beers.id as beer_id,
+	beers.name as beer_name, 
+    beers.descript as beer_descript
+		from beers
+		inner join breweries
+		on beers.brewery_id = breweries.id
+		where breweries.id = 10
+		order by beer_name;
       """;
 }

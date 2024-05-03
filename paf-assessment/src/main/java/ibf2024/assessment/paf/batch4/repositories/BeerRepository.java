@@ -36,10 +36,10 @@ public class BeerRepository implements SQLQueries, SQLColumnNames {
 	}
 		
 	// DO NOT CHANGE THE METHOD'S NAME OR THE RETURN TYPE OF THIS METHOD
-	public List<Beer> getBreweriesByBeer(/* You can add any number parameters here */) {
+	public List<Beer> getBreweriesByBeer(Integer styleID) {
 		// TODO: Task 3
 		final List<Beer> beersList = new LinkedList<>(); 
-		SqlRowSet rs = jdbcTemplate.queryForRowSet(GET_BEERS_OF_STYLE);
+		SqlRowSet rs = jdbcTemplate.queryForRowSet(GET_BEERS_OF_STYLE, styleID);
 		while (rs.next()) {
 			Beer beer = new Beer();
 			beer.setBeerId(rs.getInt(BEER_ID));
@@ -53,9 +53,34 @@ public class BeerRepository implements SQLQueries, SQLColumnNames {
 	}
 
 	// DO NOT CHANGE THE METHOD'S NAME OR THE RETURN TYPE OF THIS METHOD
-	public Optional<Brewery> getBeersFromBrewery(/* You can add any number of parameters here */) {
+	public Optional<Brewery> getBeersFromBrewery() {
 		// TODO: Task 4
+		Brewery brewery = new Brewery();
+		List<Beer> beersList = new LinkedList<>();
 
-		return Optional.empty();
+		SqlRowSet rs = jdbcTemplate.queryForRowSet(GET_BEERS_AND_DESCRIP_FOR_BREWERY);
+
+		while (rs.next()) {
+			Beer beer = new Beer();
+			brewery.setBreweryId(rs.getInt(BREWERY_ID));
+			brewery.setAddress1(rs.getString(ADDRESS1));
+			brewery.setAddress2(rs.getString(ADDRESS2));
+			brewery.setCity(rs.getString(CITY));
+			brewery.setDescription(rs.getString(BREWERY_DESCRIPTION));
+			brewery.setName(rs.getString(BREWERY_NAME));
+			brewery.setPhone(rs.getString(PHONE));
+			brewery.setWebsite(rs.getString(WEBSITE));	
+			beer.setBeerId(rs.getInt(BEER_ID));
+			beer.setBreweryId(rs.getInt(BREWERY_ID));
+			beer.setBeerDescription(rs.getString(BEER_DESCRIPTION));
+			beer.setBeerName(rs.getString(BEER_NAME));
+			beer.setBreweryName(rs.getString(BREWERY_NAME));
+			beersList.add(beer);
+		}
+		brewery.setBeers(beersList);
+		
+		Optional<Brewery> optBrewery = Optional.of(brewery);
+
+		return optBrewery;
 	}
 }
