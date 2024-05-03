@@ -1,10 +1,6 @@
 package ibf2024.assessment.paf.batch4.controllers;
 
-import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import ibf2024.assessment.paf.batch4.models.Beer;
 import ibf2024.assessment.paf.batch4.models.Brewery;
-import ibf2024.assessment.paf.batch4.models.Order;
-import ibf2024.assessment.paf.batch4.models.OrderCreation;
 import ibf2024.assessment.paf.batch4.models.Style;
 import ibf2024.assessment.paf.batch4.repositories.BeerRepository;
 import ibf2024.assessment.paf.batch4.services.BeerService;
@@ -58,10 +52,7 @@ public class BeerController {
 	public String getMethodName(@PathVariable Integer breweryID, Model model) {
 		Optional<Brewery> optBrewery = beerRepo.getBeersFromBrewery(breweryID);
 		Brewery brewery = optBrewery.orElse(null);
-		List<Order> orders = new LinkedList<>();
-		OrderCreation ordersCreation = new OrderCreation(orders);
 		model.addAttribute("brewery", brewery);
-		model.addAttribute("orders", ordersCreation);
 
 		return "view2";
 	}
